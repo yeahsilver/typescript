@@ -480,8 +480,49 @@ pad("hi", 10, "left");
 declare function pad(s: string, n: number, direction: "left" | "right"): string;
 // ---cut---
 let s = "right";
-pad("hi", 10, s); // 오류: 'string'은 '"left" | "right"'에 할당할 수 없습니다.
+pad("hi", 10, s); // 오류: 'string'은 '"left" | "right"'에 할당할 수 없음
 ```
 
 
+
+## Haskell과 비슷한 개념 
+
+- #### 문맥적인 타이핑
+
+  ```typescript
+  // 변수 s가 string형이라는 것을 추론할 수 있음
+  let s = "I'm a string!";
+  ```
+
+
+
+## 타입 별칭 (Type aliases)
+
+```typescript
+type Size = [number, number];
+let x: Size = [101.1, 999.9];
+```
+
+
+
+
+
+## 판별 유니언
+
+```typescript
+type Shape =
+| { kind: "circle"; radius: number}
+| { kind: "square", x: number}
+| { kind: "triangle"; x: number; y: number};
+
+function area(s: Shape) {
+  if (s.kind === "circle") {
+    return Math.PI * s.radius * s.radius;
+  } else if (s.kind === "square") {
+    return s.x * s.x;
+  } else {
+    return (s.x * s.y) / 2;
+  }
+}
+```
 
