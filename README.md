@@ -526,3 +526,9 @@ function area(s: Shape) {
 }
 ```
 
+
+
+
+
+## 타입 매개변수
+
