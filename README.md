@@ -532,3 +532,65 @@ function area(s: Shape) {
 
 ## 타입 매개변수
 
+- 타입 매개변수는 일반적으로 단일 대문자임.
+
+  ```typescript
+  function firstish<T extends { length: number }>(t1: T, t2: T): T {
+    return t1.length > t2.length ? t1 : t2;
+  }
+  ```
+
+
+
+- ### 상위 유형의 타입
+
+  - TypeScript는 상위 유형의 타입이 없음. 
+
+
+
+## 모듈 시스템
+
+- Import 또는 export가 포함된 파일이 암시적로 모듈이라는 점을 제외하면 JavaScript의 최신 모듈 구문운 Haskell과 유사.
+
+  ```typescript
+  import { value, Type } from "npm-package";
+  import { other, Types } from "./local-package";
+  import * as prefix from "../lib/third-package";
+  ```
+
+
+
+### readonly와 const (readonly and const)
+
+- Javascript에서 수정 가능함이 기본이지만 참조가 수정 불가능함을 선언하기 위해 const로 변수를 선언할 수 있다. 
+
+  ```
+  const a = [1, 2, 3];
+  a.push(102); // ):
+  a[0] = 101; // D:
+  ```
+
+- TypeScript는 추가적으로 프로퍼티에 readonly 제어자를 사용할 수 있다.
+
+  ```typescript
+  interface Rx {
+    readonly x: number;
+  }
+  let rx: Rx = { x: 1 };
+  rx.x = 12; // error
+  ```
+
+  
+
+- 매핑된 타입 Readonly<T>은 모든 프로퍼티를 readonly으로 만들어버립니다.
+
+  ```typescript
+  interface X {
+    x: number;
+  }
+  let rx: Readonly<X> = { x: 1 };
+  rx.x = 12; // error
+  ```
+
+  
+
