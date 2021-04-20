@@ -1,16 +1,122 @@
-# Nestjs
-
+# NestJS
+> https://docs.nestjs.com
 ## Controllers
-
->  요청을 핸들링하고 응답을 반환하는 의무를 가짐
-
-어플리케이션의 목적은 특정 요청을 받기 위함이다. 라우팅 메커니즘은 어떤 컨트롤러에 어떤 요청을 보낼 것인지 제어하는데, 각 컨트롤러는 1개 이상의 경로(route), 다른 경로들은 다른 액션을 수행할 수 있다. 
-
-
-
-기초 컨트롤러를 생성하기 위해서는 클래스와 **데코레이터** 를 사용한다. 데코레이터는 필요한 메타데이터와 함께 클래스와 결헙되고, Nest에 라우팅 맵을 생성할 수 있게 한다.
+  - Purpose: Receive specific requests for the application
+  - The routing mechanisum controls which chontroller receive which requests.
+  - Each controller has more than one route, and different routes can perform different actions
+  - In order to create a basic controller, we can use *classes* and *decorators*
+  - **Decorators** associate classes with required metadata and enable Nest to create a *routing map*
 
 
+</br>
 
 
+## Routing
+ - `@Controller()`: define a basic controller
+    
+    ```
+    import { Controller, Get } from '@nestjs/common';
 
+    @Controller('cats')
+    export clas CatsController {
+      @Get() // indicate Nest to crate a handler for specific endpoint for HTTP requests and route path
+      findAll(): String {
+        return 'This action returns all cats';
+       }
+    }
+  
+-  **Route Path**: Determined by concatenating prefix declared for the controller, and any path specified in the request decorator.
+
+
+</br>
+
+
+## Request object
+- Handlers often need access to the client request details
+- `@Req()`: help access the request object 
+  ```
+  import { Controller, Get, Req } from '@nestjs/common';
+  import { Request } from 'express';
+  
+  @Controller('cats)
+  export class CatsController {
+    @Get()
+    findAll(@Req() request: Request): string {
+      return 'This action returns all cats';
+    }
+  }
+  
+- `@Res()` = `@Response()`: response object interface
+
+</br>
+
+## Resources
+  ```
+  import { Controller, Get, Post } from '@nestjs/common';
+  
+  @Controller('cats')
+  export class CatsController {
+    @Post() // Create @Post()
+    create(): string {
+      return 'This action adds a new cat';
+    }
+    
+    @Get()
+    findAll(): string {
+      return 'This action returns all cats';
+    }
+  }
+ 
+  ```
+ 
+</br>
+
+## Routes Wildcards
+```
+@Get('ab*cd')
+findAll() {
+  return 'This route uses a wildcard';
+}
+```
+
+</br>
+
+## Status Code
+ - status code is always 200 by default (POST: 201)
+   ```
+   @Post()
+   @HttpCode(204)
+   create() {
+    return 'This action adds a new cat';
+   }
+
+
+</br>
+
+## Headers
+ - `@Header()`: Specify a custom reponse header
+ ```
+ @Post()
+ @Header('Cached-Control', 'none')
+ create() {
+  return 'This action adds a new cat';
+ }
+```
+
+</br>
+
+## Redirection
+ - `@Redirect()`: Redirect a response to a specific URL. takes two arguments(url, status code)
+  ```
+  @Get()
+  @Redirect('https://nestjs.com', 301)  
+  ```
+  ```
+  {
+    "url": string,
+    "statusCode": number
+  }
+  ```
+
+</br>
+ 
