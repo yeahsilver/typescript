@@ -30,3 +30,28 @@
 - `nest generate controller controller명`: controller 추가
 - `nest generate module modlue명`: 모듈 추가
 - `nest generate service service명`: 서비스 추가
+
+
+
+### TypeScript: 인터페이스 (Interface)
+
+- 클래스와 인터페이스
+
+  ```typescript
+  interface Shape {
+  	getArea(): number;
+  }
+  
+  class Rect implements Shape {
+  	width: number;
+  	height: number;
+  	
+  	constructor(width, height) {
+  		this.width = width;
+  		this.height = height;
+  	}
+  }
+  ```
+
+  
+
