@@ -594,3 +594,6 @@ function area(s: Shape) {
 
   
 
+### CSS 사용
+
+> https://tailwindui.com/components/application-ui/lists/tables
